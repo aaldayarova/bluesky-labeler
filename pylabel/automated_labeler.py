@@ -5,7 +5,9 @@ from atproto import Client
 import csv
 import os
 from .label import post_from_url
-from perception.hashers.image import PHash
+from io import BytesIO
+from PIL import Image
+import requests
 
 T_AND_S_LABEL = "t-and-s"
 DOG_LABEL = "dog"
@@ -32,20 +34,18 @@ class AutomatedLabeler:
         self.news = self.get_news_labels(os.path.join(input_dir, NEW_LABEL_FILE))
 
         # Milestone 4
-        self.pHash = PHash()
-        self.dog_image_hashes = []
-        for file in os.listdir(os.path.join(input_dir, DOG_DIR)):
-            if (
-                not file.endswith(".jpg")
-                and not file.endswith(".png")
-                and not file.endswith(".jpeg")
-            ):
+        self.dog_hashes = []
+        dog_images_dir = os.path.join(input_dir, DOG_DIR)
+        for file in os.listdir(dog_images_dir):
+            if not file.lower().endswith(('.jpg', '.jpeg', '.png')):
                 continue
-
-            # Hash Dog Image
-            dogImage = os.path.join(input_dir, DOG_DIR, file)
-            dogHash = self.pHash.compute(dogImage)
-            self.dog_image_hashes.append(dogHash)
+            dogImage = os.path.join(dog_images_dir, file)
+            try:
+                with Image.open(dogImage) as img:
+                    dogHash = None # makeHash(img)
+                    self.dogImageHashes.append(dogHash)
+            except Exception as e:
+                print(f"Error processing dog image {dogImage}: {e}")
 
     # Milestone 2
     def get_csv(self, path: str) -> List[str]:
