@@ -16,6 +16,7 @@ T_AND_S_DOMAIN_FILE = "t-and-s-domains.csv"
 NEW_LABEL_FILE = "news-domains.csv"
 DOG_DIR = "dog-list-images"
 
+
 class AutomatedLabeler:
     """Automated labeler implementation"""
 
@@ -34,14 +35,18 @@ class AutomatedLabeler:
         self.pHash = PHash()
         self.dog_image_hashes = []
         for file in os.listdir(os.path.join(input_dir, DOG_DIR)):
-            if not file.endswith(".jpg") and not file.endswith(".png") and not file.endswith(".jpeg"):
+            if (
+                not file.endswith(".jpg")
+                and not file.endswith(".png")
+                and not file.endswith(".jpeg")
+            ):
                 continue
-            
+
             # Hash Dog Image
             dogImage = os.path.join(input_dir, DOG_DIR, file)
             dogHash = self.pHash.compute(dogImage)
             self.dog_image_hashes.append(dogHash)
-     
+
     # Milestone 2
     def get_csv(self, path: str) -> List[str]:
         """
@@ -49,7 +54,7 @@ class AutomatedLabeler:
         """
         items = []
         try:
-            with open(path, newline='', encoding='utf-8') as file:
+            with open(path, newline="", encoding="utf-8") as file:
                 file = csv.reader(file)
                 for line in file:
                     if line:
@@ -58,7 +63,7 @@ class AutomatedLabeler:
         except Exception as e:
             print(f"Error reading file {path}: {e}")
         return items
-    
+
     # Milestone 3
     # Get News Labels
     def get_news_labels(self, path: str) -> List[str]:
@@ -67,7 +72,7 @@ class AutomatedLabeler:
         """
         news_labels = {}
         try:
-            with open(path, newline='', encoding='utf-8') as f:
+            with open(path, newline="", encoding="utf-8") as f:
                 reader = csv.reader(f)
                 next(reader, None)  # Skip header
                 for row in reader:
@@ -78,7 +83,7 @@ class AutomatedLabeler:
         except Exception as e:
             print(f"Error reading file {path}: {e}")
         return news_labels
-    
+
     def moderate_post(self, url: str) -> List[str]:
         """
         Apply moderation to the post specified by the given url
@@ -93,7 +98,6 @@ class AutomatedLabeler:
             print(f"Error fetching post {url}: {e}")
             return []
 
-        
         lower_text = text.lower()
         labels = set()
 
@@ -102,7 +106,7 @@ class AutomatedLabeler:
         for word in self.words:
             if word in lower_text:
                 labels.add(T_AND_S_LABEL)
-        
+
         for domain in self.domains:
             if domain in lower_text:
                 labels.add(T_AND_S_LABEL)
