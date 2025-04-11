@@ -54,5 +54,8 @@ def main():
 # Milestone 3
 # python test_labeler.py labeler-inputs test-data\input-posts-cite.csv
 
+# Milestone 4
+# python test_labeler.py labeler-inputs test-data\input-posts-dogs.csv
+
 if __name__ == "__main__":
     main()
