@@ -49,13 +49,13 @@ def main():
     print(f"Overall ratio of correct label assignments {num_correct/total}")
 
 # Milestone 2
-# python test_labeler.py labeler-inputs test-data\input-posts-t-and-s.csv
+# python3 test_labeler.py labeler-inputs test-data\input-posts-t-and-s.csv
 
 # Milestone 3
-# python test_labeler.py labeler-inputs test-data\input-posts-cite.csv
+# python3 test_labeler.py labeler-inputs test-data\input-posts-cite.csv
 
 # Milestone 4
-# python test_labeler.py labeler-inputs test-data\input-posts-dogs.csv
+# python3 test_labeler.py labeler-inputs test-data\input-posts-dogs.csv
 
 if __name__ == "__main__":
     main()

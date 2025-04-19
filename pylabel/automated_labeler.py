@@ -8,6 +8,7 @@ from .label import post_from_url
 from io import BytesIO
 from PIL import Image
 import requests
+import tempfile
 
 # Imports for Milestone 4
 from perception import hashers
@@ -38,9 +39,9 @@ class AutomatedLabeler:
         self.news = self.get_news_labels(os.path.join(input_dir, NEW_LABEL_FILE))
 
         # Milestone 4
-        self.dog_hashes = []
+        self.dogImageHashes = []
         dog_images_dir = os.path.join(input_dir, DOG_DIR)
-        hasher = hashers.PHash()
+        self.hasher = hashers.PHash()
     
         for file in os.listdir(dog_images_dir):
             if not file.lower().endswith(('.jpg', '.jpeg', '.png')):
@@ -48,72 +49,39 @@ class AutomatedLabeler:
             dogImage = os.path.join(dog_images_dir, file)
             try:
                 with Image.open(dogImage) as img:
-
-                    dogHash = None # makeHash(img)
+                    # Hashing images in csv
+                    img = img.convert("RGB")
+                    dogHash = self.hasher.compute(img) # Computes Hash from Image
                     self.dogImageHashes.append(dogHash)
+
+                    # Hashing images in Bluesky
+                    # pulled_images = self.extract_bluesky_image()
             except Exception as e:
                 print(f"Error processing dog image {dogImage}: {e}")
     
     # Helper function for Milestone 4 to extract image from Bluesky URL
-    def extract_bluesky_image (self):
-        client = Client()
-        # path = "../test-data/input-posts-dogs.csv"
-        path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "test-data", "input-posts-dogs.csv")
-
-        # path = os.path.join(self.input_dir, "")
-
+    def extract_bluesky_image (self, url: str):
         try:
-            with open(path, newline="", encoding="utf-8") as file:
-                file = csv.reader(file)
-                next(file)
-                for line in file:
-                    if not line: # skips any missing/empty lines (if any)
-                        continue
-                    value = line[0].strip().lower()
-                    print(f"The line is: {line}")
+            parts = url.strip('/').split('/')
+            handle = parts[-3]
+            rkey = parts[-1]
+            did = did_from_handle(handle)
 
-                    # Instead of using helper function in label.py, create own simpler helper function
-                    def parse_post_url(url):
-                        parts = url.strip('/').split('/')
-                        handle = parts[-3]
-                        rkey = parts[-1]
-                        return handle, rkey
-
-                    handle, rkey = parse_post_url(value)
-                    # print(f"post_from_url returned handle:{handle}, rkey: {rkey}")
-
-                    # Resolving the handle to DID using helper function in label.py
-                    did = did_from_handle(handle)
-
-                    # Getting the post record (?)
-                    post_record = client.com.atproto.repo.get_record({
-                        'repo': did,
-                        'collection': 'app.bsky.feed.post',
-                        'rkey': rkey
-                    })
-                    print(f"post_record is {post_record}")
-
-                    # Getting the post embedding 
-                    embed = post_record['value'].embed
-                    images = []
-                    if embed and hasattr(embed, "images"):
-                        for image_data in embed.images:
-                            cid = image_data.image.ref.link 
-                            images.append(cid)
-                    else:
-                        print("No images found in this post.")
-
-                    # Extracting image
-                    for cid in images:
-                        img_url = f"https://bsky.social/xrpc/com.atproto.sync.getBlob?did={did}&cid={cid}"
-                        response = requests.get(img_url)
-                        image = Image.open(BytesIO(response.content))
-                        image.show()
-
+            record = self.client.com.atproto.repo.get_record({
+                'repo': did,
+                'collection': 'app.bsky.feed.post',
+                'rkey': rkey
+            })
+            embed = record['value'].embed
+            if embed and hasattr(embed, "images"):
+                cid = embed.images[0].image.ref.link
+                img_url = f"https://bsky.social/xrpc/com.atproto.sync.getBlob?did={did}&cid={cid}"
+                response = requests.get(img_url)
+                response.raise_for_status()  # Raise an error for bad responses
+                return Image.open(BytesIO(response.content))
         except Exception as e:
-            print(f"Error reading file {path}: {e}")
-
-        return None
+            print(f"Error fetching image from Bluesky URL {url}: {e}")
+            return None
     
     # Milestone 2
     def get_csv(self, path: str) -> List[str]:
@@ -185,6 +153,22 @@ class AutomatedLabeler:
             if domain in lower_text:
                 labels.add(source)
 
+
+        # Milestone 4
+        image = self.extract_bluesky_image(url)
+        if image:
+            try:
+                with tempfile.NamedTemporaryFile(suffix=".png") as temp_file:
+                    image.save(temp_file, format="PNG")
+                    temp_file.flush()
+                    image_hash = self.hasher.compute(temp_file.name)
+                    for dog_hash in self.dogImageHashes:
+                        distance = self.hasher.compute_distance(image_hash, dog_hash)
+                        if distance <= THRESH:
+                            labels.add(DOG_LABEL)
+                            break
+            except Exception as e:
+                print(f"Error processing image: {e}")
         return list(labels)
 
 if __name__ == "__main__":
