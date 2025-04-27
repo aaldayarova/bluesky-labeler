@@ -5,12 +5,12 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pylabel.label import post_from_url
 
 # Environmental variables
-SE_USER = "731374990"
-SE_SECRET = "co72s3ujppojYoEAgQMCe4sQk6uPbGvA"
+SE_USER = os.getenv("SE_USER")
+SE_SECRET = os.getenv("SE_SECRET")
 SE_URL    = "https://api.sightengine.com/1.0/check.json"
 SE_MODELS = "genai"
 VERSION = "1.2.2"
-U_API_KEY = "xo1p9bRwz3e9"
+U_API_KEY = os.getenv("U_API_KEY")
 U_URL = "https://api.uclassify.com/v1"
 
 client = Client()
