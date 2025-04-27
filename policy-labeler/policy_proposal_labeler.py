@@ -1,5 +1,6 @@
 import json, requests, os, sys, csv
 from atproto import Client
+import time
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pylabel.label import post_from_url, did_from_handle
@@ -130,6 +131,7 @@ if __name__ == "__main__":
                 policy_label = None # Reset our label
                 if line:
                     post_url = line[0].strip().lower() # URL to Bluesky post
+                    start_time = time.time() # Start time for processing - feel free to comment out if there are issues with code
 
                     # Image classification workflow
                     img_url = extract_bluesky_image(post_url)
@@ -176,6 +178,11 @@ if __name__ == "__main__":
                             # Remove the closing bracket, add the new label, and close the bracket again
                             labels = line[1][:-1]  # Remove closing bracket
                             line[1] = f"{labels}, \"{policy_label}\"]"
+
+                    # Calculating time to process each example - feel free to comment out if there are issues
+                    end_time = time.time()
+                    elapsed_time = end_time - start_time
+                    print(f"Processing time for {post_url}: {elapsed_time:.2f} seconds")
                 
                 updated_rows.append(line)
             
