@@ -120,6 +120,7 @@ if __name__ == "__main__":
     path = "./test-posts.csv"
     path_results = "./test-posts-results.csv"
     updated_rows = []
+    elapsed_times = []
 
     try:
         with open(path, newline="", encoding="utf-8") as file:
@@ -183,9 +184,13 @@ if __name__ == "__main__":
                     end_time = time.time()
                     elapsed_time = end_time - start_time
                     print(f"Processing time for {post_url}: {elapsed_time:.2f} seconds")
+                    elapsed_times.append(elapsed_time)
+
                 
                 updated_rows.append(line)
-            
+        # Print the average processing time for all examples - feel free to comment out if there are issues
+        print("Average processing time: ", sum(elapsed_times) / len(elapsed_times))  
+
         # Write the updated content back to the CSV file
         with open(path_results, 'w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
