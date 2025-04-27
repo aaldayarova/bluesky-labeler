@@ -1,5 +1,8 @@
-import json, requests
-from io import BytesIO
+import json, requests, os, sys
+from atproto import Client
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from pylabel.label import post_from_url
 
 # Environmental variables
 SE_USER = "731374990"
@@ -7,6 +10,10 @@ SE_SECRET = "co72s3ujppojYoEAgQMCe4sQk6uPbGvA"
 SE_URL    = "https://api.sightengine.com/1.0/check.json"
 SE_MODELS = "genai"
 VERSION = "1.2.2"
+U_API_KEY = "xo1p9bRwz3e9"
+U_URL = "https://api.uclassify.com/v1"
+
+client = Client()
 
 # -*- coding: utf-8 -*-
 """
@@ -36,88 +43,62 @@ headers.update(
     }
 )
 
-class Check(object):
-    def __init__(self, api_user, api_secret, *args):
-        self.api_user = api_user
-        self.api_secret = api_secret
-        self.endpoint = 'https://api.sightengine.com/1.0/'
-        self.modelsType = ''
-        self.workflowId = "wfl_ilfj9O1Bt1d4JCu5hLKzi"
+# Helper function to extract post text from Bluesky URL and classify using uClassify classifier ("Topics" or "Society Topics")
+def classify_text(post_url, classifier, username="uclassify"):
+    """
+    Classify text using a specific uClassify classifier
+    
+    Args:
+        post_url (str): The url to Bluesky post to classify
+        classifier (str): The classifier to use
+        username (str): The username of the classifier owner (default is "uclassify" for public classifiers)
+    
+    Returns:
+        dict: Classification results
+    """
+    # Construct the endpoint URL
+    url = f"{U_URL}/{username}/{classifier}/classify"
 
-        if len(args) > 1:
-            for arg in args:
-                self.modelsType += arg + ','
-            self.modelsType = self.modelsType[:-1]
-        else:
-            self.modelsType = args[0]
-
-    def set_url(self, imageUrl):
-        r = requests.get(self.endpoint + 'check.json', params={'models': self.modelsType, 'url': imageUrl, 'api_user': self.api_user, 'api_secret': self.api_secret, 'workflow_id': self.workflowId}, headers=headers)
-
-        output = json.loads(r.text)
-        return output
-
-    def set_file(self, file):
-        r = requests.post(self.endpoint + 'check.json', files={'media': open(file, 'rb')}, data={'models': self.modelsType, 'api_user': self.api_user,'api_secret': self.api_secret}, headers=headers)
-
-        output = json.loads(r.text)
-        return output
-
-    def set_bytes(self, binaryImage):
-        r = requests.post(self.endpoint + 'check.json', files={'media': BytesIO(binaryImage)}, data={'models': self.modelsType, 'api_user': self.api_user, 'api_secret': self.api_secret}, headers=headers)
-
-        output = json.loads(r.text)
-        return output
-
-    def video(self, videoUrl, callbackUrl):
-        r = requests.get(self.endpoint + 'video/check.json', params={'models': self.modelsType, 'callback_url': callbackUrl, 'stream_url': videoUrl, 'api_user': self.api_user, 'api_secret': self.api_secret}, headers=headers)
-
-        output = json.loads(r.text)
-        return output
-
-    def video_sync(self, videoUrl):
-        r = requests.get(self.endpoint + 'video/check-sync.json', params={'models': self.modelsType, 'stream_url': videoUrl, 'api_user': self.api_user, 'api_secret': self.api_secret}, headers=headers)
-
-        output = json.loads(r.text)
-        return output
-
-
-class SightengineClient(object):
-    modelVersions = {}
-
-    def __init__(self, api_user, api_secret):
-        self.api_user = api_user
-        self.api_secret = api_secret
-        self.endpoint = 'https://api.sightengine.com/'
-
-    def feedback(self, model, modelClass, image):
-        if not model:
-            raise Exception('Please provide the version of the model ' + model)
-
-        if image.lower().startswith(('http://', 'https://')):
-            url = self.endpoint + '1.0/feedback.json'
-            r = requests.get(url, params={'model': model, 'class': modelClass, 'url': image, 'api_user': self.api_user, 'api_secret': self.api_secret}, headers=headers)
-        else:
-            url =  self.endpoint + '1.0/feedback.json'
-            r = requests.post(url, files={'media': open(image, 'rb')}, data={'model': model, 'class': modelClass, 'api_user': self.api_user, 'api_secret': self.api_secret}, headers=headers)
-
-        output = json.loads(r.text)
-        return output
-
-    def check(self, *args):
-        return Check(self.api_user,self.api_secret, *args)
+    # Retrieve the post text from URL
+    post = post_from_url(client, post_url)
+    post_text = post.value.text
+    
+    # Prepare the request headers
+    headers = {
+        "Authorization": f"Token {U_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    # Prepare the request payload
+    payload = {
+        "texts": [post_text]
+    }
+    
+    # Make the API request
+    response = requests.post(url, headers=headers, data=json.dumps(payload))
+    
+    # Check if the request was successful
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: {response.status_code}")
+        print(response.text)
+        return None
 
 if __name__ == "__main__":
-    # client = SightengineClient(SE_USER, SE_SECRET)
-    # output = client.check('genai').set_url('https://p.potaufeu.asahi.com/1831-p/picture/27695628/89644a996fdd0cfc9e06398c64320fbe.jpg')
-    # print(output)
     params = {
     'url': 'https://img.freepik.com/premium-photo/scary-conceptual-image-bloody-knife-hand_894218-5746.jpg',
     'workflow': 'wfl_ilfj9O1Bt1d4JCu5hLKzi',
-    'api_user': '731374990',
-    'api_secret': 'co72s3ujppojYoEAgQMCe4sQk6uPbGvA'
+    'api_user': SE_USER,
+    'api_secret': SE_SECRET
     }
     r = requests.get('https://api.sightengine.com/1.0/check-workflow.json', params=params)
+    image_output = json.loads(r.text)
+    print(image_output)
 
-    output = json.loads(r.text)
-    print(output)
+    print("------------")
+
+    post_url = 'https://bsky.app/profile/newrepublic.com/post/3lnqevchm3r2b'
+    classifier = "Society Topics"
+    text_output = classify_text(post_url, classifier)
+    print(f"Post classification probabilities: {text_output}")
