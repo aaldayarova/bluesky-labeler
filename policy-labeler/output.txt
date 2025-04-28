@@ -1,0 +1,271 @@
+The probability that image is AI-generated:  0.08
+The probability that text is about society:  0.210683
+The probability that text is specifically about politics:  0.000875179
+--------------
+Processing time for https://bsky.app/profile/rickylongthread.bsky.social/post/3lns5oxdsf22s: 3.42 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.00422347
+The probability that text is specifically about politics:  0.163003
+--------------
+Processing time for https://bsky.app/profile/birthbydrip.bsky.social/post/3lnsta6lfuc2k: 4.15 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.0357493
+The probability that text is specifically about politics:  0.586078
+--------------
+Processing time for https://bsky.app/profile/glenndishere.bsky.social/post/3lnstadfijk24: 2.26 seconds
+The probability that image is AI-generated:  0.36
+The probability that text is about society:  0.643576
+The probability that text is specifically about politics:  0.402401
+--------------
+Processing time for https://bsky.app/profile/bobbytoo.bsky.social/post/3lnlk5blx4b2d: 3.35 seconds
+The probability that image is AI-generated:  0.99
+The probability that text is about society:  0.52592
+The probability that text is specifically about politics:  0.0358132
+--------------
+Processing time for https://bsky.app/profile/cs5342-group3.bsky.social/post/3lnsxkq56sc2l: 3.20 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.955044
+The probability that text is specifically about politics:  0.00899952
+--------------
+Processing time for https://bsky.app/profile/bid4one.bsky.social/post/3lnsycjfd7k2p: 2.29 seconds
+The probability that image is AI-generated:  0.02
+The probability that text is about society:  0.740423
+The probability that text is specifically about politics:  0.0401849
+--------------
+Processing time for https://bsky.app/profile/thisuspatriot.bsky.social/post/3lnszb255qc26: 4.43 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.0465742
+The probability that text is specifically about politics:  0.00072096
+--------------
+Processing time for https://bsky.app/profile/cutecats221.bsky.social/post/3le2hypudkc2s: 1.77 seconds
+The probability that image is AI-generated:  0.04
+The probability that text is about society:  0.11071
+The probability that text is specifically about politics:  0.0278521
+--------------
+Processing time for https://bsky.app/profile/cutecats221.bsky.social/post/3ldnduwydb22d: 2.13 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.135722
+The probability that text is specifically about politics:  0.0263618
+--------------
+Processing time for https://bsky.app/profile/thekentacorn.bsky.social/post/3lns7nyynlc2q: 3.17 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.689928
+The probability that text is specifically about politics:  0.0133399
+--------------
+Processing time for https://bsky.app/profile/lorenzothecat.bsky.social/post/3lnsebyljps2g: 1.74 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.0180374
+The probability that text is specifically about politics:  0.00126265
+--------------
+Processing time for https://bsky.app/profile/nicodelort.bsky.social/post/3lnsxlwvyu227: 2.35 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.00294064
+The probability that text is specifically about politics:  1.86442e-06
+--------------
+Processing time for https://bsky.app/profile/jimmusilpainter.bsky.social/post/3lnscy2hxhc2s: 2.09 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  4.11818e-07
+The probability that text is specifically about politics:  0.04
+--------------
+Processing time for https://bsky.app/profile/lfcblog.bsky.social/post/3lnsrjc3y6223: 3.56 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.028633
+The probability that text is specifically about politics:  0.00101819
+--------------
+Processing time for https://bsky.app/profile/lukelukeluke.bsky.social/post/3lnsjzya2zs25: 2.36 seconds
+The probability that image is AI-generated:  0.02
+The probability that text is about society:  0.162176
+The probability that text is specifically about politics:  0.0995672
+--------------
+Processing time for https://bsky.app/profile/profgalloway.com/post/3lnspth242k24: 2.03 seconds
+The probability that image is AI-generated:  0.04
+The probability that text is about society:  0.135174
+The probability that text is specifically about politics:  0.0313263
+--------------
+Processing time for https://bsky.app/profile/unicouniuni3.bsky.social/post/3lnsdchcewk2o: 2.01 seconds
+The probability that image is AI-generated:  0.02
+The probability that text is about society:  1.0
+The probability that text is specifically about politics:  0.0602872
+--------------
+Processing time for https://bsky.app/profile/cait.bsky.social/post/3lnsygucegc2g: 2.31 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.450146
+The probability that text is specifically about politics:  0.0165259
+--------------
+Processing time for https://bsky.app/profile/benwritesthings.bsky.social/post/3lnt2telyxs2y: 2.12 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.353449
+The probability that text is specifically about politics:  0.00111524
+--------------
+Processing time for https://bsky.app/profile/context776.bsky.social/post/3lnt2t75vok22: 3.10 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.919402
+The probability that text is specifically about politics:  0.21136
+--------------
+Processing time for https://bsky.app/profile/andyheppelle.bsky.social/post/3lnt2ymfce22n: 1.88 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.00681039
+The probability that text is specifically about politics:  0.0855846
+--------------
+Processing time for https://bsky.app/profile/starscars.bsky.social/post/3lnt2znjsus2t: 2.04 seconds
+The probability that image is AI-generated:  0.001
+The probability that text is about society:  0.385765
+The probability that text is specifically about politics:  0.0528076
+--------------
+Processing time for https://bsky.app/profile/madgreek2024.bsky.social/post/3lnssbkzv7s2d: 3.06 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.0006291
+The probability that text is specifically about politics:  0.053349
+--------------
+Processing time for https://bsky.app/profile/pokemongems.bsky.social/post/3lns7pa7iu22i: 2.60 seconds
+The probability that image is AI-generated:  0.9
+The probability that text is about society:  0.133116
+The probability that text is specifically about politics:  0.0671007
+--------------
+Processing time for https://bsky.app/profile/nuphoto.com/post/3lnsoj6t6522x: 2.14 seconds
+The probability that image is AI-generated:  0.02
+The probability that text is about society:  1.0
+The probability that text is specifically about politics:  0.0602872
+--------------
+Processing time for https://bsky.app/profile/cait.bsky.social/post/3lnsygucegc2g: 2.08 seconds
+The probability that image is AI-generated:  0.08
+The probability that text is about society:  0.0144546
+The probability that text is specifically about politics:  0.0193305
+--------------
+Processing time for https://bsky.app/profile/cathamclarke.bsky.social/post/3lnsypudxcs2n: 2.07 seconds
+The probability that image is AI-generated:  0.03
+The probability that text is about society:  0.953143
+The probability that text is specifically about politics:  0.12636
+--------------
+Processing time for https://bsky.app/profile/hankgreen.bsky.social/post/3lnqsogrows2x: 1.92 seconds
+The probability that image is AI-generated:  0.99
+The probability that text is about society:  0.737651
+The probability that text is specifically about politics:  0.0170168
+--------------
+Processing time for https://bsky.app/profile/donaldjtrump-maga.bsky.social/post/3ldx3vvt3ds2w: 2.15 seconds
+The probability that image is AI-generated:  0.1
+The probability that text is about society:  0.146828
+The probability that text is specifically about politics:  0.000135473
+--------------
+Processing time for https://bsky.app/profile/rfk-junior.bsky.social/post/3ldkhfwct2s2l: 3.52 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.395615
+The probability that text is specifically about politics:  0.000191291
+--------------
+Processing time for https://bsky.app/profile/donaldjtrump-maga.bsky.social/post/3lcm4h4eqsc2l: 2.05 seconds
+The probability that image is AI-generated:  0.99
+The probability that text is about society:  0.215971
+The probability that text is specifically about politics:  0.0258285
+--------------
+Processing time for https://bsky.app/profile/donaldjtrump-maga.bsky.social/post/3lbzsucelpk23: 2.17 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.00585887
+The probability that text is specifically about politics:  0.00293281
+--------------
+Processing time for https://bsky.app/profile/donaldjtrump-maga.bsky.social/post/3lbod5i2xyc2s: 1.83 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.30964
+The probability that text is specifically about politics:  0.998791
+--------------
+Processing time for https://bsky.app/profile/brianpshea.bsky.social/post/3lnt3fzqwd22z: 1.87 seconds
+The probability that image is AI-generated:  0.99
+The probability that text is about society:  0.0479861
+The probability that text is specifically about politics:  0.192209
+--------------
+Processing time for https://bsky.app/profile/elesazehndorfer.bsky.social/post/3ldgzobxg3s2d: 2.05 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.282362
+The probability that text is specifically about politics:  0.15834
+--------------
+Processing time for https://bsky.app/profile/davidshoebridge.bsky.social/post/3lkr656gzjk23: 2.00 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.134614
+The probability that text is specifically about politics:  0.366605
+--------------
+Processing time for https://bsky.app/profile/cheinyeanlim.bsky.social/post/3kvqsffp32p27: 3.92 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.0123759
+The probability that text is specifically about politics:  0.0163831
+--------------
+Processing time for https://bsky.app/profile/karenho.bsky.social/post/3lnoy3cgxic2l: 2.23 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.874897
+The probability that text is specifically about politics:  0.457788
+--------------
+Processing time for https://bsky.app/profile/lumberjackwharfie.bsky.social/post/3lnkrsp6kqs2r: 2.24 seconds
+The probability that image is AI-generated:  0.02
+The probability that text is about society:  0.0963833
+The probability that text is specifically about politics:  0.33509
+--------------
+Processing time for https://bsky.app/profile/researchnt.bsky.social/post/3lnfamt6fys2n: 2.83 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.078354
+The probability that text is specifically about politics:  0.0331511
+--------------
+Processing time for https://bsky.app/profile/mlbbot.bsky.social/post/3lnbuzk7bey2v: 1.70 seconds
+The probability that image is AI-generated:  0.99
+The probability that text is about society:  2.02967e-06
+The probability that text is specifically about politics:  1.28625e-06
+--------------
+Processing time for https://bsky.app/profile/barkintime.bsky.social/post/3lnlae3gfwk2k: 3.00 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.554241
+The probability that text is specifically about politics:  0.272605
+--------------
+Processing time for https://bsky.app/profile/unsissel.bsky.social/post/3lmzfph3qxc2m: 2.11 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.112657
+The probability that text is specifically about politics:  0.232973
+--------------
+Processing time for https://bsky.app/profile/itssamanthaaaa.bsky.social/post/3lmrb7idmik24: 2.23 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.1
+The probability that text is specifically about politics:  0.04
+--------------
+Processing time for https://bsky.app/profile/mrantifascism.com/post/3lnrzp6obm22u: 2.72 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.053873
+The probability that text is specifically about politics:  0.0197189
+--------------
+Processing time for https://bsky.app/profile/kevinsphotography.bsky.social/post/3lnstsoduns25: 3.04 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.0554766
+The probability that text is specifically about politics:  0.103912
+--------------
+Processing time for https://bsky.app/profile/stansaidairport.bsky.social/post/3lnshg65huc26: 3.13 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.0195447
+The probability that text is specifically about politics:  0.0193782
+--------------
+Processing time for https://bsky.app/profile/angrywaterman.bsky.social/post/3lnrdplja4k24: 1.88 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.0398488
+The probability that text is specifically about politics:  0.053451
+--------------
+Processing time for https://bsky.app/profile/deepgreens.bsky.social/post/3lnse2wy4ac2k: 3.21 seconds
+The probability that image is AI-generated:  0.58
+The probability that text is about society:  0.52379
+The probability that text is specifically about politics:  0.25915
+--------------
+Processing time for https://bsky.app/profile/ronfilipkowski.bsky.social/post/3lnsvsbv2ck2j: 3.14 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.120309
+The probability that text is specifically about politics:  0.0559774
+--------------
+Processing time for https://bsky.app/profile/mdineenphoto.bsky.social/post/3lnryktwi6s2f: 2.05 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.279664
+The probability that text is specifically about politics:  0.941836
+--------------
+Processing time for https://bsky.app/profile/junlper.beer/post/3lnszioi3s22h: 1.74 seconds
+The probability that image is AI-generated:  0.01
+The probability that text is about society:  0.0834829
+The probability that text is specifically about politics:  0.00448829
+--------------
+Processing time for https://bsky.app/profile/aoife.bsky.social/post/3lnsq47hw622m: 17.67 seconds
+The probability that image is AI-generated:  0.02
+The probability that text is about society:  0.00763563
+The probability that text is specifically about politics:  0.971136
+--------------
+Processing time for https://bsky.app/profile/theathletic.bsky.social/post/3lnqtqn5h3k2b: 2.18 seconds
+Error reading file ./test-posts.csv: 'type'

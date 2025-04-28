@@ -6,8 +6,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pylabel.label import post_from_url, did_from_handle
 
 # Environmental variables
-SE_USER = os.getenv("SE_USER")
-SE_SECRET = os.getenv("SE_SECRET")
+SE_USER_AIKA = os.getenv("SE_USER")
+SE_SECRET_AIKA = os.getenv("SE_SECRET")
 SE_URL    = "https://api.sightengine.com/1.0/check.json"
 SE_MODELS = "genai"
 VERSION = "1.2.2"
@@ -139,11 +139,12 @@ if __name__ == "__main__":
                     params = {
                     'url': img_url,
                     'workflow': 'wfl_ilfj9O1Bt1d4JCu5hLKzi',
-                    'api_user': SE_USER,
-                    'api_secret': SE_SECRET
+                    'api_user': SE_USER_AIKA,
+                    'api_secret': SE_SECRET_AIKA
                     }
                     r = requests.get('https://api.sightengine.com/1.0/check-workflow.json', params=params)
                     image_output = json.loads(r.text)
+                    print(image_output)
                     ai_generated_probability = image_output['type']['ai_generated']
                     print("The probability that image is AI-generated: ", ai_generated_probability)
 
@@ -176,9 +177,15 @@ if __name__ == "__main__":
                         if line[1] == "[]":
                             line[1] = f"[\"{policy_label}\"]"
                         else:
-                            # Remove the closing bracket, add the new label, and close the bracket again
-                            labels = line[1][:-1]  # Remove closing bracket
-                            line[1] = f"{labels}, \"{policy_label}\"]"
+                            # Parse the existing array, add new item, and reformat
+                            # Remove the brackets first
+                            labels = line[1][1:-1]  # Remove both opening and closing brackets
+                            
+                            # Only add a comma if there are existing items
+                            if labels.strip():  # Check if there's actual content after removing brackets
+                                line[1] = f"[{labels}, \"{policy_label}\"]"
+                            else:
+                                line[1] = f"[\"{policy_label}\"]"
 
                     # Calculating time to process each example - feel free to comment out if there are issues
                     end_time = time.time()
