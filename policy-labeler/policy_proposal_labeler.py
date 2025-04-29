@@ -165,7 +165,7 @@ if __name__ == "__main__":
                     img_url = extract_bluesky_image(post_url)
                     params = {
                     'url': img_url,
-                    'workflow': 'wfl_ilfj9O1Bt1d4JCu5hLKzi',
+                    'workflow': 'wfl_inaMFc1m3npdhlY74KIWZ',
                     'api_user': SE_USER_AIKA,
                     'api_secret': SE_SECRET_AIKA
                     }
