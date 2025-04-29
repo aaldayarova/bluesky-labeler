@@ -1,6 +1,7 @@
 import json, requests, os, sys, csv
 from atproto import Client
 import time
+import re
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pylabel.label import post_from_url, did_from_handle
@@ -62,7 +63,10 @@ def classify_text(post_url, classifier, username="uclassify"):
 
     # Retrieve the post text from URL
     post = post_from_url(client, post_url)
-    post_text = post.value.text
+    raw = post.value.text
+
+    # Cleans Hashtags
+    cleaned = process_hashtags_in_text(raw)
     
     # Prepare the request headers
     headers = {
@@ -72,7 +76,7 @@ def classify_text(post_url, classifier, username="uclassify"):
     
     # Prepare the request payload
     payload = {
-        "texts": [post_text]
+        "texts": [cleaned]
     }
     
     # Make the API request
@@ -85,6 +89,29 @@ def classify_text(post_url, classifier, username="uclassify"):
         print(f"Error: {response.status_code}")
         print(response.text)
         return None
+
+def process_hashtag(tag: str) -> str:
+    """
+    Turn a single hashtag into space-separated words based on capitalization and digits.
+    
+    Examples:
+        process_hashtag("#GovernmentFunding")  -> "Government Funding"
+        process_hashtag("#Election2024")       -> "Election 2024"
+        process_hashtag("#TrumpMaga")          -> "Trump Maga"
+    """
+    # strip leading hash
+    s = tag.lstrip('#')
+    # find runs of capitalized words, all-caps abbreviations, or numbers
+    parts = re.findall(r'[A-Z]?[a-z]+|[A-Z]+(?![a-z])|[0-9]+', s)
+    return ' '.join(parts)
+
+
+def process_hashtags_in_text(text: str) -> str:
+    """
+    Replace every hashtag in the input text with its processed form.
+    e.g. "Watch #Election2024 updates" -> "Watch Election 2024 updates"
+    """
+    return re.sub(r'#\w+', lambda m: process_hashtag(m.group(0)), text)
 
 # Helper function to extract post image from Bluesky URL and classify using Sightengine ("AI-generated")
 def extract_bluesky_image (url):
@@ -155,6 +182,9 @@ if __name__ == "__main__":
                     text_output2 = classify_text(post_url, classifier2)[0]['classification']
                     society_probability = None
                     politics_probability = None
+                    law_probability = None
+                    history_probability = None
+                    govt_probability = None
                     for category in text_output1:
                         if category['className'] == 'Society':
                             society_probability = category['p']
@@ -163,14 +193,41 @@ if __name__ == "__main__":
                         if category['className'] == 'Politics':
                             politics_probability = category['p']
                             break
+                    for category in text_output2:
+                        if category['className'] == 'Law':
+                            law_probability = category['p']
+                            break
+                    for category in text_output2:
+                        if category['className'] == 'History':
+                            history_probability = category['p']
+                            break
+                    for category in text_output2:
+                        if category['className'] == 'Government':
+                            govt_probability = category['p']
+                            break
                     print("The probability that text is about society: ", society_probability)
                     print("The probability that text is specifically about politics: ", politics_probability)
+                    print("The probability that text is specifically about law: ", law_probability)
+                    print("The probability that text is specifically about history: ", history_probability)
+                    print("The probability that text is specifically about government: ", govt_probability)
                     print("--------------")
-
                     # Calculate label
-                    if ai_generated_probability >= 0.75 and (society_probability >= 0.5 or politics_probability >= 0.5):
-                        policy_label = 'Potentially AI-generated political information'
-                    
+                    if ai_generated_probability >= 0.75:
+                        # Check if any individual probability is above 0.5
+                        if (law_probability >= 0.5 or politics_probability >= 0.5 or
+                            history_probability >= 0.5 or govt_probability >= 0.5 or society_probability >= 0.5):
+                            policy_label = 'Potentially AI-generated political information'
+                        # Check if any two probabilities are both above 0.3
+                        elif ((law_probability >= 0.3 and politics_probability >= 0.3) or
+                            (law_probability >= 0.3 and history_probability >= 0.3) or
+                            (law_probability >= 0.3 and govt_probability >= 0.3) or
+                            (politics_probability >= 0.3 and history_probability >= 0.3) or
+                            (politics_probability >= 0.3 and govt_probability >= 0.3) or
+                            (history_probability >= 0.3 and govt_probability >= 0.3)):
+                            policy_label = 'Potentially AI-generated political information'
+                        # If none of the above conditions are met
+                        else:
+                            policy_label = None
                     # Update the line with the policy label
                     if policy_label:
                         # Check if "Labels" column already has entries
