@@ -212,39 +212,43 @@ if __name__ == "__main__":
                     print("The probability that text is specifically about government: ", govt_probability)
                     print("--------------")
                     # Calculate label
-                    # 1) any single category > 0.5
-                    if any(p >= 0.5 for p in (
-                        law_probability,
-                        politics_probability,
-                        history_probability,
-                        govt_probability,
-                        society_probability
-                    )):
-                        policy_label = 'Potentially AI-generated political information'
 
-                    # 2) or any two categories sum to ≥ 0.5
-                    else:
-                        probs = [
-                            law_probability or 0.0,
-                            politics_probability or 0.0,
-                            history_probability or 0.0,
-                            govt_probability or 0.0,
-                            society_probability or 0.0
-                        ]
-                        # check all unique pairs
-                        found_pair = False
-                        for i in range(len(probs)):
-                            for j in range(i+1, len(probs)):
-                                if probs[i] + probs[j] >= 0.5:
-                                    found_pair = True
-                                    break
-                            if found_pair:
-                                break
-
-                        if found_pair:
+                    # Check for AI
+                    if ai_generated_probability >= 0.75:
+                        # 1) any single category > 0.5
+                        if any(p >= 0.5 for p in (
+                            law_probability,
+                            politics_probability,
+                            history_probability,
+                            govt_probability,
+                            society_probability
+                        )):
                             policy_label = 'Potentially AI-generated political information'
+
+                        # 2) or any two categories sum to ≥ 0.5
                         else:
-                            policy_label = None
+                            probs = [
+                                law_probability or 0.0,
+                                politics_probability or 0.0,
+                                history_probability or 0.0,
+                                govt_probability or 0.0,
+                                society_probability or 0.0
+                            ]
+                            # check all unique pairs
+                            found_pair = False
+                            for i in range(len(probs)):
+                                for j in range(i+1, len(probs)):
+                                    if probs[i] + probs[j] >= 0.5:
+                                        found_pair = True
+                                        break
+                                if found_pair:
+                                    break
+
+                            if found_pair:
+                                policy_label = 'Potentially AI-generated political information'
+                            else:
+                                policy_label = None
+
                     # Update the line with the policy label
                     if policy_label:
                         # Check if "Labels" column already has entries
